@@ -16,4 +16,8 @@ class HeadingH1 extends Component {
   }
 }
 
+HeadingH1.propTypes = {
+  
+}
+
 export default HeadingH1;

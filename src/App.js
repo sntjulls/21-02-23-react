@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
-import CiaoSection from "./components/CiaoSection";
+import Calendar from "./components/Calendar";
 
 const App = (props) => {
   return (
     <>
-      <CiaoSection />
+<Calendar/>
     </>
   );
 };

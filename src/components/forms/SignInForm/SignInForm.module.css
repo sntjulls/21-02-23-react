@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  width: 95%;
+  margin: auto;
+}
+.input {
+  padding: 0.5em;
+  margin-top: 10px;
+}
+.valid{
+border: 2px solid teal;
+}
+.invalid{
+  border: 2px solid red;
+}
