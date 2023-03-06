@@ -1,0 +1,16 @@
+@use "/src/common/styles/breakpoints" as *;
+$space: 20px;
+.container {
+    background-color: pink;
+  max-width: 300px;
+  margin: auto;
+  @media screen and (min-width: $sm) {
+    max-width: $sm - $space;
+  }
+  @media screen and (min-width: $md) {
+    max-width: $md - $space;
+  }
+  @media screen and (min-width: $lg) {
+    max-width: $lg - $space;
+  }
+}

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { format, add, startOfMonth } from "date-fns";
+import styles from "./Calendar.module.scss";
 
 class Calendar extends Component {
   constructor(props) {
@@ -21,14 +22,14 @@ class Calendar extends Component {
   render() {
     const { date } = this.state;
     return (
-      <div>
-        <p>
+      <div className={styles.container}>
+        <p className={styles.content}>
           функція, яка повертає день тижня з якого почався місяць:{" "}
           {format(startOfMonth(date), "EEEE")}
         </p>
         <p>{format(date, "do MMMM yyyy, 'date:' EEEE 'Time:'  HH:mm:ss")}</p>
-        <button onClick={this.addDay}>add 1 day</button>
-        <button onClick={this.addMonth}>add 1 month</button>
+        <button className={styles.btn} onClick={this.addDay}>add 1 day</button>
+        <button className={styles.btn} onClick={this.addMonth}>add 1 month</button>
       </div>
     );
   }
