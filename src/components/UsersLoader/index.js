@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+import { getRandomUsers } from "../../api";
+import Spinner from "../Spinner";
+import Error from "../Error";
+import Paginate from "./../Paginate/index";
+import UsersList from "./UsersList";
+import { configRandomUser } from "../../configs";
+import ControlAmount from "./ControlAmount";
 
 class UsersLoader extends Component {
   constructor(props) {
@@ -9,17 +15,14 @@ class UsersLoader extends Component {
       isPending: false,
       error: null,
       currentPage: 1,
+      currentResult: configRandomUser.AMOUNT,
     };
   }
 
   load = () => {
     const { currentPage } = this.state;
     this.setState({ isPending: true });
-    fetch(
-      "https://randomuser.me/api/?results=10&seed=fd2022-2-ajax&page=1" +
-        currentPage
-    )
-      .then((response) => response.json())
+    getRandomUsers({ page: currentPage })
       .then((data) =>
         this.setState({
           users: data.results,
@@ -38,8 +41,7 @@ class UsersLoader extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { currentPage } = this.state;
-    if (currentPage !== prevState.currentPage) {
+    if (this.state.currentPage !== prevState.currentPage) {
       this.load();
     }
   }
@@ -53,26 +55,31 @@ class UsersLoader extends Component {
   handleNextBtn = () =>
     this.setState((state) => ({ currentPage: this.state.currentPage + 1 }));
 
+  setResults = (value) => this.setState({ currentResult: value });
   render() {
-    const { users, isPending, error, currentPage } = this.state;
+    const { users, isPending, error, currentPage, currentResult } = this.state;
 
     if (error) {
-      return <h3>Error!</h3>;
+      return <Error />;
     }
 
     if (isPending) {
-      return <h3>Loading...</h3>;
+      return <Spinner />;
     }
 
     return (
       <section>
         <h2>User List</h2>
-        <div>
-          <button onClick={this.handlePrevBtn}>prev &lt; </button>
-          <strong> {currentPage} </strong>
-          <button onClick={this.handleNextBtn}> &gt; next</button>
-        </div>
-        <ul>{users.map(this.mapUsers)}</ul>
+
+        <ControlAmount amounts={[5, 10, 15]} currentResult={currentResult}
+        setResults={this.setResults} />
+
+        <Paginate
+          currentPage={currentPage}
+          handlePrevBtn={this.handlePrevBtn}
+          handleNextBtn={this.handleNextBtn}
+        />
+        <UsersList users={users} />
       </section>
     );
   }

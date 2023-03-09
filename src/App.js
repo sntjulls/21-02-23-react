@@ -7,19 +7,30 @@ import Container from "./components/Grid/Container";
 import Row from "./components/Grid/Row";
 import StopWatch from "./components/StopWatch/index";
 import UsersLoader from "./components/UsersLoader";
+import WindowSizes from "./WindowSizes";
 
 const App = (props) => {
   return (
     <>
-    <UsersLoader/>
-      {/* <Flex fd="row" jc="space-around" ai="center" fw="wrap">
-        <StopWatch />
-        <Calendar />
-      </Flex>
-      <Flex fd="column" jc="center" ai="start" fw="nowrap">
-        <StopWatch />
-        <Calendar />
-      </Flex> */}
+      {/* <UsersLoader/> */}
+<WindowSizes/>
+      <button onClick={() => window.close()}>close</button>
+      <button onClick={() => window.open("https://www.w3schools.com/")}>
+        open w3schools
+      </button>
+      <hr />
+      <hr />
+      <button
+        onClick={() => window.location.assign("https://www.w3schools.com/")}
+      >
+        asign
+      </button>
+      <button
+        onClick={() => window.location.replace("https://www.google.com/")}
+      >
+        replace
+      </button>
+      <button onClick={() => window.location.reload()}>reload</button>
     </>
   );
 };
