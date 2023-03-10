@@ -1,43 +1,77 @@
 import React from "react";
-import { BrowserRouter, Route, Routes, NavLink } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  NavLink,
+  Outlet,
+} from "react-router-dom";
 import "./App.css";
-import Calendar from "./components/Calendar";
-import Flex from "./components/Flex";
-import Col from "./components/Grid/Col";
-import Container from "./components/Grid/Container";
-import Row from "./components/Grid/Row";
-import StopWatch from "./components/StopWatch/index";
-import UsersLoader from "./components/UsersLoader";
-import WindowSizes from "./WindowSizes";
+import HomePage from "./pages/HomePage";
+import StopWatchPages from "./pages/StopWatchPages";
+import CiaoSection from "./components/CiaoSection";
+import UserSection from "./components/UserSection";
+import NotFoundPage from "./pages/NotFoundPage";
+import CounterPage from "./pages/CounterPage";
+import LoaderPage from "./pages/LoaderPage";
 
-const Home = () => <h1>Home</h1>;
-const About = () => <h1>About</h1>;
-const Contacts = () => <h1>Contacts</h1>;
-const NotFound = () => <h1>404</h1>;
+const Section = () => {
+  return (
+    <>
+      <h1>Common part</h1>
+      <Outlet />
+    </>
+  );
+};
 
 const App = (props) => {
   return (
-    <BrowserRouter>
-      <nav>
-        <ul>
-          <li>
-            <NavLink to="/">home</NavLink>
-          </li>
-          <li>
-            <NavLink to="/about">about</NavLink>
-          </li>
-          <li>
-            <NavLink to="/contacts">contacts</NavLink>
-          </li>
-        </ul>
-      </nav>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contacts" element={<Contacts />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <nav>
+          <ul>
+            <li>
+              <NavLink to="/">home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/counter">counter</NavLink>
+            </li>
+            <li>
+              <NavLink to="/loader">counter</NavLink>
+            </li>
+            <li>
+              <NavLink to="/stop-watch">stop-watch</NavLink>
+            </li>
+            <li>
+              Section:
+              <ul>
+                <li>
+                  <NavLink to="/section/ciao">ciao</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/section/user">user</NavLink>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/counter" element={<CounterPage />} />
+          <Route path="/stop-watch" element={<StopWatchPages />} />
+          <Route path="/section/" element={<Section />}>
+            <Route path="ciao" element={<CiaoSection />} />
+            <Route path="user" element={<UserSection />} />
+          </Route>
+          <Route path="/loader/" element={<LoaderPage />}>
+            <Route path="ciao" element={<CiaoSection />} />
+            <Route path="user" element={<UserSection />} />
+          </Route>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+        <footer>2023</footer>
+      </BrowserRouter>
+    </>
   );
 };
 

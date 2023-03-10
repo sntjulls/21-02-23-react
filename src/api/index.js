@@ -28,3 +28,9 @@ export const getRandomUsers = (options = {}) => {
     `${configRandomUser.BASE_URL}?${queryString.stringify(resOptions)}`
   ).then((response) => response.json());
 };
+
+export const getJsonUsers = () =>
+  fetch("/data/users.json").then((res) => res.json());
+
+export const getJsonPhones = () =>
+  fetch("/data/phones.json").then((res) => res.json());
