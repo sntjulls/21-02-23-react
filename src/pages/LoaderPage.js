@@ -1,31 +1,42 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import LoaderData from "../components/LoaderData";
-import { getJsonPhones, getJsonUsers } from "./../api/index";
+import { getJsonUsers, getJsonPhones } from "../api";
+import Spinner from "../components/Spinner";
+import Error from "../components/Error";
 
-class LoaderPage extends Component {
-  render() {
+const LoaderPage = (props) => {
+  const mapPhones = ({ id, title, price }) => (
+    <li key={id}>
+      {title} - {price}uah
+    </li>
+  );
+  const mapUsers = ({ id, name }) => <li key={id}>{name}</li>;
+  const renderUsers = (state) => {
+    const { data, isPending, error } = state;
     return (
-      <div>
-        <LoaderData
-          loadData={getJsonUsers}
-          render={(state) => {
-            const { users, isPending, error } = this.state;
-            return (
-              <section>
-                {isPending && <Spinner />}
-                {error && <Error />}
-                {users.length > 0 && <ol>{users.map(this.mapUsers)}</ol>}
-              </section>
-            );
-          }}
-        />
-        <LoaderData loadData={getJsonPhones} />
-      </div>
+      <section>
+        {isPending && <Spinner />}
+        {error && <Error />}
+        {data.length > 0 && <ol>{data.map(mapUsers)}</ol>}
+      </section>
     );
-  }
-}
-
-LoaderPage.propTypes = {};
+  };
+  const renderPhones = (state) => {
+    const { data, error, isPending } = state;
+    return (
+      <section>
+        {isPending && <Spinner />}
+        {error && <Error />}
+        {data.length > 0 && <ol>{data.map(mapPhones)}</ol>}
+      </section>
+    );
+  };
+  return (
+    <div>
+      <LoaderData loadData={getJsonUsers}>{renderUsers}</LoaderData>
+      <LoaderData loadData={getJsonPhones}>{renderPhones}</LoaderData>
+    </div>
+  );
+};
 
 export default LoaderPage;

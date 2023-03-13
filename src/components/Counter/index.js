@@ -1,37 +1,54 @@
 import React, { Component } from "react";
-import Counter from "../components/Counter";
+import PropTypes from "prop-types";
 
-class CounterPage extends Component {
+class Counter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      step: 1,
+      count: 0,
     };
   }
-  handleStep = ({ target: { name, value } }) => {
-    this.setState({ [name]: Number(value) });
+  handleAdd = () => {
+    this.setState((state, props) => ({
+      count: state.count + Number(props.step),
+    }));
   };
+  handleSub = () => {
+    this.setState((state, props) => ({
+      count: state.count - Number(props.step),
+    }));
+  };
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.step === this.props.step && nextProps.text === this.props.text;
+  }
   render() {
-    const { step } = this.state;
+    const { count } = this.state;
+    const styles = {
+      width: "50%",
+      margin: "auto",
+      display: "flex",
+      flexDirection: "column",
+      backgroundColor: "pink",
+      textAlign: "center",
+    };
+    console.log("render");
     return (
-      <>
-        <Counter step={step} />
-        <label
-          style={{ display: "block", marginTop: "15px", textAlign: "center" }}
-        >
-          <input
-            type="range"
-            min={1}
-            max={10}
-            value={step}
-            onChange={this.handleStep}
-            name="step"
-          />{" "}
-          step = {step}
-        </label>
-      </>
+      <section style={styles}>
+        <h3>count:{count}</h3>
+        <button onClick={this.handleAdd}>+</button>
+        <button onClick={this.handleSub}>-</button>
+        <button onClick={() => console.log(count)}>click me</button>
+      </section>
     );
   }
 }
 
-export default CounterPage;
+Counter.defaultProps = {
+  step: 1,
+};
+
+Counter.propTypes = {
+  step: PropTypes.number,
+};
+
+export default Counter;

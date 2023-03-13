@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import Spinner from "../Spinner";
+import Error from "../Error";
 
 class LoaderUsers extends Component {
   constructor(props) {

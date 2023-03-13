@@ -11,7 +11,7 @@ import HomePage from "./pages/HomePage";
 import StopWatchPages from "./pages/StopWatchPages";
 import CiaoSection from "./components/CiaoSection";
 import UserSection from "./components/UserSection";
-import NotFoundPage from "./pages/NotFoundPage";
+// import NotFoundPage from "./pages/NotFoundPage";
 import CounterPage from "./pages/CounterPage";
 import LoaderPage from "./pages/LoaderPage";
 
@@ -37,7 +37,7 @@ const App = (props) => {
               <NavLink to="/counter">counter</NavLink>
             </li>
             <li>
-              <NavLink to="/loader">counter</NavLink>
+              <NavLink to="/loader">loader</NavLink>
             </li>
             <li>
               <NavLink to="/stop-watch">stop-watch</NavLink>
@@ -63,11 +63,8 @@ const App = (props) => {
             <Route path="ciao" element={<CiaoSection />} />
             <Route path="user" element={<UserSection />} />
           </Route>
-          <Route path="/loader/" element={<LoaderPage />}>
-            <Route path="ciao" element={<CiaoSection />} />
-            <Route path="user" element={<UserSection />} />
-          </Route>
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="/loader/" element={<LoaderPage />} />
+          {/* <Route path="*" element={<NotFoundPage />} /> */}
         </Routes>
         <footer>2023</footer>
       </BrowserRouter>

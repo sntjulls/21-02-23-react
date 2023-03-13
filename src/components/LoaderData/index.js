@@ -1,38 +1,35 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
 
 class LoaderData extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isPending: false,
+      data: [],
       error: null,
-      users: [],
+      isPending: false,
     };
   }
-
   load = () => {
-    const {loadData}=this.props 
-    this.setState({ isPending: false });
+    const { loadData } = this.props;
+    this.setState({ isPending: true });
     loadData()
-      .then((users) => this.setState({ users }))
+      .then((data) => this.setState({ data }))
       .catch((error) => this.setState({ error }))
       .finally(() => this.setState({ isPending: false }));
   };
-
   componentDidMount() {
-    this.load;
+    this.load();
   }
-
   render() {
-    const {render} = this.props;
-    return render(this.state);;
+    const { children } = this.props;
+    return children(this.state);
   }
 }
 
 LoaderData.propTypes = {
-    loadData: PropTypes.func,
-    render: PropTypes.func.isRequired
+  loadData: PropTypes.func,
+  children: PropTypes.func.isRequired,
 };
 
 export default LoaderData;
