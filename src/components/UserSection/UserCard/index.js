@@ -1,26 +1,24 @@
-import React, { Component } from "react";
-import { PropTypes } from "prop-types";
+import React from "react";
+import PropTypes from "prop-types";
 
-class UserCard extends Component {
-  handleChooseUser = () => {
-    //isSelected = true
+const UserCard = (props) => {
+  const {
+    user: { id, firstName, lastName, isSelected },
+    userSelector,
+  } = props;
+  const styles = { color: isSelected ? "teal" : "pink" };
+  const handleSelector = () => {
+    userSelector(id);
   };
-  render() {
-    const { id, firstName, lastName, isSelected, userSelector } = this.state;
-    const styles = { color: isSelected ? "teal" : "pink" };
-    const handleSelector = () => {
-      userSelector(id);
-    };
-    return (
-      <article style={styles} onClick={handleSelector}>
-        <h3>
-          <em>{id}) </em> {firstName} {lastName}
-        </h3>
-        {/* <button onClick={this.handleChooseUser}></button> */}
-      </article>
-    );
-  }
-}
+  return (
+    <article style={styles} onClick={handleSelector}>
+      <h3>
+        <em>{id}) </em>
+        {firstName} {lastName}
+      </h3>
+    </article>
+  );
+};
 
 UserCard.defaultProps = {
   user: {
@@ -29,7 +27,7 @@ UserCard.defaultProps = {
     lastName: "noname",
     isSelected: true,
   },
-  userSelector: ()=>{}
+  userSelector: () => {},
 };
 
 export const userShape = PropTypes.shape({
@@ -38,6 +36,7 @@ export const userShape = PropTypes.shape({
   lastName: PropTypes.string.isRequired,
   isSelected: PropTypes.bool.isRequired,
 });
+
 UserCard.propTypes = {
   user: userShape.isRequired,
   userSelector: PropTypes.func,
