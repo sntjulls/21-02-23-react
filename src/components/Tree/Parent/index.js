@@ -1,13 +1,25 @@
 import React from "react";
+import { ThemeContext } from "../../../contexts";
 import SubParent from "../SubParent";
+import CONSTANTS from "../../../constants";
+import { WithTheme } from "../../HOC";
+const { THEMES } = CONSTANTS;
 
 const Parent = (props) => {
+  const { theme } = props;
+  const isLightTheme = theme === THEMES.LIGHT;
   return (
-    <div style={{ border: "1px solid teal", padding: "10px", margin: "10px" }}>
-      <h2>Parent</h2>
-      <SubParent/>
+    <div
+      style={{
+        backgroundColor: isLightTheme ? "wheat" : "#222",
+        color: isLightTheme ? "#222" : "wheat",
+      }}
+    >
+      <SubParent />
     </div>
   );
 };
 
-export default Parent;
+
+
+export default WithTheme(Parent);
