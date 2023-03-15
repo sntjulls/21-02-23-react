@@ -4,8 +4,8 @@ import styles from "./SignInForm.module.css";
 const initialState = {
   email: "",
   password: "",
-  emailValid: false,
-  passwordValid: false,
+  emailValid: true,
+  passwordValid: true,
 };
 
 class SignInForm extends Component {
