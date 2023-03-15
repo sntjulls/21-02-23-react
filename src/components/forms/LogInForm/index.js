@@ -1,39 +1,51 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { Formik } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { SIGN_IN_SCHEMA } from "../../../utils/validationSchemas.js";
+import styles from "./LogInForm.module.scss";
 
 const initialValues = {
   email: "",
-  password: "",
+  password: "", //gr3at@3wdsG
 };
 
 const LogInForm = (props) => {
   const onSubmit = (values, formikBag) => {
     console.log("values", values);
     console.log("formikBag", formikBag);
+    formikBag.resetForm();
   };
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+      validationSchema={SIGN_IN_SCHEMA}
+    >
       {(formikProps) => {
-        console.log(formikProps);
+        // console.log(formikProps);
         return (
-          <form>
-            <input
-              type="email"
+          <Form className={styles.form}>
+            <Field type="email" name="email" placeholder="email" />
+            <ErrorMessage
               name="email"
-              onChange={formikProps.handleReset}
+              component="div"
+              className={styles.error}
             />
-            <input
-              type="password"
+            {/* {formikProps.errors.email && formikProps.touched.email && (
+              <div>{formikProps.errors.email}</div>
+            )} */}
+            <Field type="password" name="password" placeholder="password" />
+            <ErrorMessage
               name="password"
-              onChange={formikProps.handleChange}
+              component="div"
+              className={styles.error}
             />
-            <input
-              type="submit"
-              name="submit"
-              onChange={formikProps.handleChange}
-            />
-          </form>
+
+            {/* {formikProps.errors.password && formikProps.touched.password && (
+              <div>{formikProps.errors.password}</div>
+            )} */}
+
+            <input type="submit" value="Send" />
+          </Form>
         );
       }}
     </Formik>
