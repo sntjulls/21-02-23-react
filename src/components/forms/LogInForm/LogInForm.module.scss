@@ -1,15 +1,18 @@
-.form{
-    display: flex;
-    flex-direction: column;
-    width: 350px;
-    margin: auto;
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  margin: auto;
+  position: relative;
+  & > * {
+    margin-top: 10px;
+    font-size: 1.2rem;
+
     & > * {
-        margin-top: 10px;
-        font-size: 1.2em;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      font-size: 1.2rem;
     }
-
-
-.error{
-    color: red;
-}
+  }
 }

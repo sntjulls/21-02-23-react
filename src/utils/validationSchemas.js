@@ -20,6 +20,7 @@ export const SIGN_UP_SCHEMA = Yup.object({
   lastName: NAME_SCHEMA,
   email: EMAIL_SCHEMA,
   password: PASSWORD_SCHEMA,
+  passwordConfirm: Yup.string().oneOf([Yup.ref("password")], "Wrong!"),
   age: Yup.number().min(14).max(150).required("Must required"),
   male: Yup.string()
     .default("female")
@@ -29,5 +30,9 @@ export const SIGN_UP_SCHEMA = Yup.object({
 export const SIGN_IN_SCHEMA = Yup.object({
   email: EMAIL_SCHEMA,
   password: PASSWORD_SCHEMA,
+  gender: Yup.string().oneOf(
+    ["male", "female"],
+    "Must be one of male or female".required("Must required"),
+  ),
 });
 //gr3at@3wdsG

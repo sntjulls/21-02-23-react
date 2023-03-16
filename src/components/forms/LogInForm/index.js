@@ -1,11 +1,13 @@
 import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import { SIGN_IN_SCHEMA } from "../../../utils/validationSchemas.js";
 import styles from "./LogInForm.module.scss";
+import InputValid from "./../InputValid/index.js";
 
 const initialValues = {
   email: "",
   password: "", //gr3at@3wdsG
+  gender: "",
 };
 
 const LogInForm = (props) => {
@@ -24,26 +26,14 @@ const LogInForm = (props) => {
         // console.log(formikProps);
         return (
           <Form className={styles.form}>
-            <Field type="email" name="email" placeholder="email" />
-            <ErrorMessage
-              name="email"
-              component="div"
-              className={styles.error}
-            />
-            {/* {formikProps.errors.email && formikProps.touched.email && (
-              <div>{formikProps.errors.email}</div>
-            )} */}
-            <Field type="password" name="password" placeholder="password" />
-            <ErrorMessage
+            <InputValid name="email" type="email" placeholder="Your email" />
+            <InputValid
               name="password"
-              component="div"
-              className={styles.error}
+              type="password"
+              placeholder="Your password"
             />
-
-            {/* {formikProps.errors.password && formikProps.touched.password && (
-              <div>{formikProps.errors.password}</div>
-            )} */}
-
+            <InputValid type="radio" value="Male" name="gender" /> Male
+            <InputValid type="radio" value="Female" name="gender" /> Female
             <input type="submit" value="Send" />
           </Form>
         );
