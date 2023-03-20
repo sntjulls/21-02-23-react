@@ -23,6 +23,8 @@ const LearnHooks = (props) => {
     };
   }, []);
 
+  
+
   return (
     <div style={{ backgroundColor: "pink" }}>
       <p>coord x:{coords.x}</p>
