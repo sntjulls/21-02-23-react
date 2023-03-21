@@ -1,12 +1,13 @@
 import React from "react";
 import Calendar from "../components/Calendar";
-import UsersLoader from "../components/UsersLoader";
+import UserProfile from "../components/UserProfile";
 
 const HomePage = () => {
   return (
     <div>
       <Calendar />
-      <UsersLoader />
+      {/* <UsersLoader /> */}
+      <UserProfile />
     </div>
   );
 };
