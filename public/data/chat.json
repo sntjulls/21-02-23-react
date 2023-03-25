@@ -1,0 +1,14 @@
+{
+  "messages": [
+    { "id": 5, "content": "hi!", "authorID": 11 },
+    { "id": 2, "content": "chat!", "authorID": 11 },
+    { "id": 7, "content": "test!", "authorID": 27 },
+    { "id": 6, "content": "bye!", "authorID": 3 },
+    { "id": 3, "content": "bye!", "authorID": 11 }
+  ],
+  "users": [
+    { "id": 11, "name": "Brad Pitt" },
+    { "id": 27, "name": "Yulia" },
+    { "id": 3, "name": "Tom Rot" }
+  ]
+}

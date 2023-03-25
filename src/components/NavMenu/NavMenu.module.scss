@@ -1,0 +1,36 @@
+@use "/src/common/styles/colors" as *;
+$width: 300px;
+
+.container {
+  height: 100vh;
+  width: $width;
+  background-color: $color-main;
+  color: $color-text;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -$width;
+  transition: left 0.5s;
+  ul {
+    list-style: none;
+    padding: 0;
+    padding-top: 20px;
+  }
+  a {
+    display: block;
+    margin-bottom: 2px;
+    padding: 1rem;
+    background-color: #ffffff22;
+    text-transform: uppercase;
+    &:hover {
+      background-color: #ffffff00;
+    }
+  }
+  .close {
+    position: absolute;
+    right: 5px;
+  }
+}
+.open {
+  left: 0;
+}

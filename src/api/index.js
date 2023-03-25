@@ -34,3 +34,5 @@ export const getJsonUsers = () =>
 
 export const getJsonPhones = () =>
   fetch("/data/phones.json").then((res) => res.json());
+
+export const getChat = () => fetch("/data/chat.json").then((res) => res.json());

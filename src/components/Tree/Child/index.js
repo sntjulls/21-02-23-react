@@ -1,5 +1,4 @@
 import React from "react";
-import UserCard from "../../UserSection/UserCard";
 import UserProfile from "../UserProfile";
 
 const Child = (props) => {
